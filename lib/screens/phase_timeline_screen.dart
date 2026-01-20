@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:ligno_yiled/l10n/app_localizations.dart';
 import 'package:ligno_yiled/models/crop_input.dart';
 import 'package:ligno_yiled/models/phase_instance.dart';
 import 'package:ligno_yiled/models/phase_plan.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:ligno_yiled/l10n/app_localizations.dart';
 import 'package:ligno_yiled/widgets/app_drawer.dart';
 import 'package:ligno_yiled/widgets/language_selector.dart';
 

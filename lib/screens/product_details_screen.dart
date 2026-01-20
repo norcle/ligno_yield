@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:ligno_yiled/l10n/app_localizations.dart';
 import 'package:ligno_yiled/data/local_data_repository.dart';
 import 'package:ligno_yiled/models/product.dart';
 
