@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:ligno_yiled/models/calculation_result.dart';
 import 'package:ligno_yiled/models/crop_input.dart';
 import 'package:ligno_yiled/screens/about_screen.dart';
+import 'package:ligno_yiled/screens/animated_splash_screen.dart';
 import 'package:ligno_yiled/screens/contacts_screen.dart';
 import 'package:ligno_yiled/screens/input_screen.dart';
 import 'package:ligno_yiled/screens/phase_timeline_screen.dart';
 import 'package:ligno_yiled/screens/result_screen.dart';
 
 class AppRoutes {
+  static const splash = '/splash';
   static const input = '/';
   static const phaseTimeline = '/phase-timeline';
   static const result = '/result';
@@ -33,6 +35,11 @@ class ResultScreenArgs {
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
+    case AppRoutes.splash:
+      return MaterialPageRoute(
+        builder: (_) => const AnimatedSplashScreen(),
+        settings: settings,
+      );
     case AppRoutes.input:
       return MaterialPageRoute(
         builder: (_) => const InputScreen(),
