@@ -5,13 +5,13 @@ import 'package:ligno_yiled/widgets/locale_scope.dart';
 class AppLanguageSelector extends StatelessWidget {
   const AppLanguageSelector({super.key});
 
-  static const Map<String, String> _languageLabels = {
-    'ru': 'RU',
-    'en': 'EN',
-    'uz': 'UZ',
-    'kk': 'KZ',
-    'tg': 'TJ',
-    'ar': 'AR',
+  static const Map<String, _LanguageOption> _languageOptions = {
+    'ru': _LanguageOption(flag: '🇷🇺', label: 'Russian'),
+    'en': _LanguageOption(flag: '🇬🇧', label: 'English'),
+    'uz': _LanguageOption(flag: '🇺🇿', label: 'O‘zbek'),
+    'kk': _LanguageOption(flag: '🇰🇿', label: 'Қазақша'),
+    'tg': _LanguageOption(flag: '🇹🇯', label: 'Тоҷикӣ'),
+    'ar': _LanguageOption(flag: '🇸🇦', label: 'العربية'),
   };
 
   @override
@@ -28,15 +28,62 @@ class AppLanguageSelector extends StatelessWidget {
           }
           controller.setLocale(locale);
         },
+        selectedItemBuilder: (context) {
+          return AppLocaleController.supportedLocales.map((locale) {
+            final option = _languageOptions[locale.languageCode];
+            return _LanguageOptionRow(
+              option: option,
+              fallbackLabel: locale.languageCode,
+              compact: true,
+            );
+          }).toList();
+        },
         items: AppLocaleController.supportedLocales.map((locale) {
-          final label =
-              _languageLabels[locale.languageCode] ?? locale.languageCode;
+          final option = _languageOptions[locale.languageCode];
           return DropdownMenuItem<Locale>(
             value: locale,
-            child: Text(label),
+            child: _LanguageOptionRow(
+              option: option,
+              fallbackLabel: locale.languageCode,
+            ),
           );
         }).toList(),
       ),
     );
   }
+}
+
+class _LanguageOptionRow extends StatelessWidget {
+  const _LanguageOptionRow({
+    required this.option,
+    required this.fallbackLabel,
+    this.compact = false,
+  });
+
+  final _LanguageOption? option;
+  final String fallbackLabel;
+  final bool compact;
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final label = option?.label ?? fallbackLabel;
+    final flag = option?.flag ?? '🌐';
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(flag, style: textTheme.titleMedium),
+        SizedBox(width: compact ? 6 : 10),
+        Text(label),
+      ],
+    );
+  }
+}
+
+class _LanguageOption {
+  const _LanguageOption({required this.flag, required this.label});
+
+  final String flag;
+  final String label;
 }
