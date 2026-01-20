@@ -1,0 +1,23 @@
+{
+  "@@locale": "tg",
+  "appTitle": "LignoUrozhai",
+  "menuCalculator": "Ҳисобкунак",
+  "menuAbout": "Дар бораи барнома",
+  "menuContacts": "Тамос / Дастгирӣ",
+  "inputCrop": "Зироат",
+  "inputSoilType": "Навъи хок",
+  "inputStartDate": "Санаи оғози нашъунамо",
+  "inputArea": "Майдони коркард (га)",
+  "actionCalculate": "Ҳисоб кардан",
+  "actionContinue": "Идома додан",
+  "actionBack": "Баргашт",
+  "resultTitle": "Натиҷа",
+  "resultTotal": "Ҳамагӣ",
+  "phaseDayLabel": "Рӯз {day}",
+  "@phaseDayLabel": {
+    "description": "Label for a phase day offset",
+    "placeholders": {
+      "day": {}
+    }
+  }
+}

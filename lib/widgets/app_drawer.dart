@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:ligno_yiled/routes.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -22,30 +23,35 @@ class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Drawer(
       child: SafeArea(
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(
+            DrawerHeader(
               child: Text(
-                'LignoUrozhai',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                l10n.appTitle,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
             ListTile(
               leading: const Icon(Icons.calculate_outlined),
-              title: const Text('Calculator'),
+              title: Text(l10n.menuCalculator),
               onTap: () => _navigate(context, AppRoutes.input),
             ),
             ListTile(
               leading: const Icon(Icons.info_outline),
-              title: const Text('About the App'),
+              title: Text(l10n.menuAbout),
               onTap: () => _navigate(context, AppRoutes.about),
             ),
             ListTile(
               leading: const Icon(Icons.support_agent_outlined),
-              title: const Text('Contacts / Support'),
+              title: Text(l10n.menuContacts),
               onTap: () => _navigate(context, AppRoutes.contacts),
             ),
           ],

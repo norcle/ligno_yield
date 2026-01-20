@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:ligno_yiled/models/crop_input.dart';
 import 'package:ligno_yiled/routes.dart';
 import 'package:ligno_yiled/widgets/app_drawer.dart';
+import 'package:ligno_yiled/widgets/language_selector.dart';
 
 class InputScreen extends StatefulWidget {
   const InputScreen({super.key});
@@ -102,12 +104,19 @@ class _InputScreenState extends State<InputScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('LignoUrozhai'),
+        title: Text(l10n.appTitle),
         centerTitle: true,
         backgroundColor: theme.colorScheme.inversePrimary,
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: 8),
+            child: AppLanguageSelector(),
+          ),
+        ],
       ),
       drawer: const AppDrawer(),
       body: SafeArea(
@@ -121,8 +130,8 @@ class _InputScreenState extends State<InputScreen> {
                 builder: (context, value, _) {
                   return DropdownButtonFormField<String>(
                     value: value,
-                    decoration: const InputDecoration(
-                      labelText: 'Crop',
+                    decoration: InputDecoration(
+                      labelText: l10n.inputCrop,
                     ),
                     items: _crops
                         .map(
@@ -144,8 +153,8 @@ class _InputScreenState extends State<InputScreen> {
                 builder: (context, value, _) {
                   return DropdownButtonFormField<SoilType>(
                     value: value,
-                    decoration: const InputDecoration(
-                      labelText: 'Soil type',
+                    decoration: InputDecoration(
+                      labelText: l10n.inputSoilType,
                     ),
                     items: SoilType.values
                         .map(
@@ -165,9 +174,9 @@ class _InputScreenState extends State<InputScreen> {
               TextFormField(
                 controller: _dateController,
                 readOnly: true,
-                decoration: const InputDecoration(
-                  labelText: 'Vegetation start date',
-                  suffixIcon: Icon(Icons.calendar_today_outlined),
+                decoration: InputDecoration(
+                  labelText: l10n.inputStartDate,
+                  suffixIcon: const Icon(Icons.calendar_today_outlined),
                 ),
                 onTap: _pickDate,
                 validator: (_) => _selectedDate.value == null
@@ -177,8 +186,8 @@ class _InputScreenState extends State<InputScreen> {
               const SizedBox(height: 16),
               TextFormField(
                 controller: _areaController,
-                decoration: const InputDecoration(
-                  labelText: 'Treated area (ha)',
+                decoration: InputDecoration(
+                  labelText: l10n.inputArea,
                 ),
                 keyboardType: const TextInputType.numberWithOptions(
                   decimal: true,
@@ -217,7 +226,7 @@ class _InputScreenState extends State<InputScreen> {
               const SizedBox(height: 24),
               FilledButton(
                 onPressed: _submit,
-                child: const Text('Calculate'),
+                child: Text(l10n.actionCalculate),
               ),
             ],
           ),

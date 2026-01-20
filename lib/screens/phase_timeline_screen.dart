@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:ligno_yiled/models/crop_input.dart';
 import 'package:ligno_yiled/models/phase_instance.dart';
 import 'package:ligno_yiled/models/phase_plan.dart';
@@ -6,6 +7,7 @@ import 'package:ligno_yiled/routes.dart';
 import 'package:ligno_yiled/services/calculator_service.dart';
 import 'package:ligno_yiled/services/phase_plan_service.dart';
 import 'package:ligno_yiled/widgets/app_drawer.dart';
+import 'package:ligno_yiled/widgets/language_selector.dart';
 
 class PhaseTimelineScreen extends StatefulWidget {
   const PhaseTimelineScreen({
@@ -71,12 +73,19 @@ class _PhaseTimelineScreenState extends State<PhaseTimelineScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('LignoUrozhai'),
+        title: Text(l10n.appTitle),
         centerTitle: true,
         backgroundColor: theme.colorScheme.inversePrimary,
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: 8),
+            child: AppLanguageSelector(),
+          ),
+        ],
       ),
       drawer: const AppDrawer(),
       body: SafeArea(
@@ -118,10 +127,10 @@ class _PhaseTimelineScreenState extends State<PhaseTimelineScreen> {
                           leading: Checkbox(
                             value: phase.isEnabled,
                             onChanged: (value) => _togglePhase(phase, value),
-                          ),
+                        ),
                           title: Text(phase.name),
                           subtitle: Text(
-                            'Day ${phase.dayOffset} · ${_formatDate(phase.date)}',
+                            '${l10n.phaseDayLabel(phase.dayOffset)} · ${_formatDate(phase.date)}',
                           ),
                         ),
                       );
@@ -137,14 +146,14 @@ class _PhaseTimelineScreenState extends State<PhaseTimelineScreen> {
                   Expanded(
                     child: OutlinedButton(
                       onPressed: () => Navigator.of(context).pop(),
-                      child: const Text('Back'),
+                      child: Text(l10n.actionBack),
                     ),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
                     child: FilledButton(
                       onPressed: _continueToResult,
-                      child: const Text('Continue'),
+                      child: Text(l10n.actionContinue),
                     ),
                   ),
                 ],

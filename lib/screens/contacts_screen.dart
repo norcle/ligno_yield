@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:ligno_yiled/widgets/app_drawer.dart';
+import 'package:ligno_yiled/widgets/language_selector.dart';
 
 class ContactsScreen extends StatelessWidget {
   const ContactsScreen({super.key});
@@ -7,12 +9,19 @@ class ContactsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('LignoUrozhai'),
+        title: Text(l10n.appTitle),
         centerTitle: true,
         backgroundColor: theme.colorScheme.inversePrimary,
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: 8),
+            child: AppLanguageSelector(),
+          ),
+        ],
       ),
       drawer: const AppDrawer(),
       body: SafeArea(
@@ -22,7 +31,7 @@ class ContactsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Contacts / Support',
+                l10n.menuContacts,
                 style: theme.textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
