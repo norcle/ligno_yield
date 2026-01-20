@@ -1,0 +1,23 @@
+{
+  "@@locale": "uz",
+  "appTitle": "LignoUrozhai",
+  "menuCalculator": "Kalkulyator",
+  "menuAbout": "Ilova haqida",
+  "menuContacts": "Kontaktlar / Yordam",
+  "inputCrop": "Ekin",
+  "inputSoilType": "Tuproq turi",
+  "inputStartDate": "Vegetatsiya boshlanish sanasi",
+  "inputArea": "Ishlov berilgan maydon (ga)",
+  "actionCalculate": "Hisoblash",
+  "actionContinue": "Davom etish",
+  "actionBack": "Orqaga",
+  "resultTitle": "Natija",
+  "resultTotal": "Jami miqdor",
+  "phaseDayLabel": "Kun {day}",
+  "@phaseDayLabel": {
+    "description": "Label for a phase day offset",
+    "placeholders": {
+      "day": {}
+    }
+  }
+}

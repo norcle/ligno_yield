@@ -1,0 +1,23 @@
+{
+  "@@locale": "ru",
+  "appTitle": "LignoUrozhai",
+  "menuCalculator": "Калькулятор",
+  "menuAbout": "О приложении",
+  "menuContacts": "Контакты / Поддержка",
+  "inputCrop": "Культура",
+  "inputSoilType": "Тип почвы",
+  "inputStartDate": "Дата начала вегетации",
+  "inputArea": "Обрабатываемая площадь (га)",
+  "actionCalculate": "Рассчитать",
+  "actionContinue": "Продолжить",
+  "actionBack": "Назад",
+  "resultTitle": "Результат",
+  "resultTotal": "Итоговое количество",
+  "phaseDayLabel": "День {day}",
+  "@phaseDayLabel": {
+    "description": "Label for a phase day offset",
+    "placeholders": {
+      "day": {}
+    }
+  }
+}

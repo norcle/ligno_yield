@@ -1,0 +1,23 @@
+{
+  "@@locale": "kk",
+  "appTitle": "LignoUrozhai",
+  "menuCalculator": "Калькулятор",
+  "menuAbout": "Қосымша туралы",
+  "menuContacts": "Байланыс / Қолдау",
+  "inputCrop": "Дақыл",
+  "inputSoilType": "Топырақ түрі",
+  "inputStartDate": "Вегетация басталу күні",
+  "inputArea": "Өңделген аумақ (га)",
+  "actionCalculate": "Есептеу",
+  "actionContinue": "Жалғастыру",
+  "actionBack": "Артқа",
+  "resultTitle": "Нәтиже",
+  "resultTotal": "Жалпы мөлшер",
+  "phaseDayLabel": "Күн {day}",
+  "@phaseDayLabel": {
+    "description": "Label for a phase day offset",
+    "placeholders": {
+      "day": {}
+    }
+  }
+}

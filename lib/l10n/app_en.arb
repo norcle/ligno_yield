@@ -1,0 +1,23 @@
+{
+  "@@locale": "en",
+  "appTitle": "LignoUrozhai",
+  "menuCalculator": "Calculator",
+  "menuAbout": "About the App",
+  "menuContacts": "Contacts / Support",
+  "inputCrop": "Crop",
+  "inputSoilType": "Soil type",
+  "inputStartDate": "Vegetation start date",
+  "inputArea": "Treated area (ha)",
+  "actionCalculate": "Calculate",
+  "actionContinue": "Continue",
+  "actionBack": "Back",
+  "resultTitle": "Result",
+  "resultTotal": "Total amount",
+  "phaseDayLabel": "Day {day}",
+  "@phaseDayLabel": {
+    "description": "Label for a phase day offset",
+    "placeholders": {
+      "day": {}
+    }
+  }
+}
