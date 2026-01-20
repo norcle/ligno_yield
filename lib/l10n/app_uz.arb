@@ -8,11 +8,33 @@
   "inputSoilType": "Tuproq turi",
   "inputStartDate": "Vegetatsiya boshlanish sanasi",
   "inputArea": "Ishlov berilgan maydon (ga)",
+  "inputAvgYieldLabel": "O‘rtacha hosildorlik (sentner/ga)",
+  "inputPriceLabel": "1 tonna uchun reja narxi (RUB)",
+  "inputSelectCropError": "Ekinni tanlang",
+  "inputSelectSoilError": "Tuproq turini tanlang",
+  "inputSelectDateError": "Boshlanish sanasini tanlang",
+  "inputAreaRequiredError": "Maydonni kiriting",
+  "inputAreaMinError": "Maydon 0 dan katta bo‘lishi kerak",
   "actionCalculate": "Hisoblash",
   "actionContinue": "Davom etish",
   "actionBack": "Orqaga",
   "resultTitle": "Natija",
+  "resultTreatedAreaLabel": "Ishlov berilgan maydon: {area} ga",
+  "@resultTreatedAreaLabel": {
+    "description": "Label for treated area on result screen",
+    "placeholders": {
+      "area": {}
+    }
+  },
+  "resultApplicationsLabel": "Ishlovlar",
   "resultTotal": "Jami miqdor",
+  "phaseStartDateLabel": "Boshlanish sanasi: {date}",
+  "@phaseStartDateLabel": {
+    "description": "Label for the plan start date on the phase timeline screen",
+    "placeholders": {
+      "date": {}
+    }
+  },
   "phaseDayLabel": "Kun {day}",
   "@phaseDayLabel": {
     "description": "Label for a phase day offset",

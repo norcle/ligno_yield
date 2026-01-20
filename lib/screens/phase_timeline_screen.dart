@@ -82,7 +82,7 @@ class _PhaseTimelineScreenState extends State<PhaseTimelineScreen> {
         backgroundColor: theme.colorScheme.inversePrimary,
         actions: const [
           Padding(
-            padding: EdgeInsets.only(right: 8),
+            padding: EdgeInsetsDirectional.only(end: 8),
             child: AppLanguageSelector(),
           ),
         ],
@@ -92,7 +92,7 @@ class _PhaseTimelineScreenState extends State<PhaseTimelineScreen> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+              padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -104,7 +104,9 @@ class _PhaseTimelineScreenState extends State<PhaseTimelineScreen> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'Start date: ${_formatDate(widget.input.startDate)}',
+                    l10n.phaseStartDateLabel(
+                      _formatDate(widget.input.startDate),
+                    ),
                     style: theme.textTheme.bodyLarge,
                   ),
                 ],
@@ -115,7 +117,12 @@ class _PhaseTimelineScreenState extends State<PhaseTimelineScreen> {
                 valueListenable: _phasesNotifier,
                 builder: (context, phases, _) {
                   return ListView.separated(
-                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                      16,
+                      8,
+                      16,
+                      16,
+                    ),
                     itemCount: phases.length,
                     separatorBuilder: (_, __) => const SizedBox(height: 8),
                     itemBuilder: (context, index) {
@@ -127,7 +134,7 @@ class _PhaseTimelineScreenState extends State<PhaseTimelineScreen> {
                           leading: Checkbox(
                             value: phase.isEnabled,
                             onChanged: (value) => _togglePhase(phase, value),
-                        ),
+                          ),
                           title: Text(phase.name),
                           subtitle: Text(
                             '${l10n.phaseDayLabel(phase.dayOffset)} · ${_formatDate(phase.date)}',
@@ -140,7 +147,7 @@ class _PhaseTimelineScreenState extends State<PhaseTimelineScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+              padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
               child: Row(
                 children: [
                   Expanded(

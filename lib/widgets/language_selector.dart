@@ -11,6 +11,7 @@ class AppLanguageSelector extends StatelessWidget {
     'uz': 'UZ',
     'kk': 'KZ',
     'tg': 'TJ',
+    'ar': 'AR',
   };
 
   @override

@@ -8,11 +8,33 @@
   "inputSoilType": "Навъи хок",
   "inputStartDate": "Санаи оғози нашъунамо",
   "inputArea": "Майдони коркард (га)",
+  "inputAvgYieldLabel": "Ҳосили миёна (ц/га)",
+  "inputPriceLabel": "Нархи нақшавӣ барои 1 тонна (RUB)",
+  "inputSelectCropError": "Зироатро интихоб кунед",
+  "inputSelectSoilError": "Навъи хокро интихоб кунед",
+  "inputSelectDateError": "Санаи оғозро интихоб кунед",
+  "inputAreaRequiredError": "Майдони коркардро ворид кунед",
+  "inputAreaMinError": "Майдон бояд аз 0 калон бошад",
   "actionCalculate": "Ҳисоб кардан",
   "actionContinue": "Идома додан",
   "actionBack": "Баргашт",
   "resultTitle": "Натиҷа",
+  "resultTreatedAreaLabel": "Майдони коркард: {area} га",
+  "@resultTreatedAreaLabel": {
+    "description": "Label for treated area on result screen",
+    "placeholders": {
+      "area": {}
+    }
+  },
+  "resultApplicationsLabel": "Коркардҳо",
   "resultTotal": "Ҳамагӣ",
+  "phaseStartDateLabel": "Санаи оғоз: {date}",
+  "@phaseStartDateLabel": {
+    "description": "Label for the plan start date on the phase timeline screen",
+    "placeholders": {
+      "date": {}
+    }
+  },
   "phaseDayLabel": "Рӯз {day}",
   "@phaseDayLabel": {
     "description": "Label for a phase day offset",

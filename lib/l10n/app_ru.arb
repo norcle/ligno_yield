@@ -8,11 +8,33 @@
   "inputSoilType": "Тип почвы",
   "inputStartDate": "Дата начала вегетации",
   "inputArea": "Обрабатываемая площадь (га)",
+  "inputAvgYieldLabel": "Средняя урожайность (ц/га)",
+  "inputPriceLabel": "Плановая цена за 1 т (руб.)",
+  "inputSelectCropError": "Выберите культуру",
+  "inputSelectSoilError": "Выберите тип почвы",
+  "inputSelectDateError": "Выберите дату начала",
+  "inputAreaRequiredError": "Введите площадь",
+  "inputAreaMinError": "Площадь должна быть больше 0",
   "actionCalculate": "Рассчитать",
   "actionContinue": "Продолжить",
   "actionBack": "Назад",
   "resultTitle": "Результат",
+  "resultTreatedAreaLabel": "Обрабатываемая площадь: {area} га",
+  "@resultTreatedAreaLabel": {
+    "description": "Label for treated area on result screen",
+    "placeholders": {
+      "area": {}
+    }
+  },
+  "resultApplicationsLabel": "Обработки",
   "resultTotal": "Итоговое количество",
+  "phaseStartDateLabel": "Дата начала: {date}",
+  "@phaseStartDateLabel": {
+    "description": "Label for the plan start date on the phase timeline screen",
+    "placeholders": {
+      "date": {}
+    }
+  },
   "phaseDayLabel": "День {day}",
   "@phaseDayLabel": {
     "description": "Label for a phase day offset",

@@ -8,11 +8,33 @@
   "inputSoilType": "Топырақ түрі",
   "inputStartDate": "Вегетация басталу күні",
   "inputArea": "Өңделген аумақ (га)",
+  "inputAvgYieldLabel": "Орташа өнімділік (ц/га)",
+  "inputPriceLabel": "1 тонна үшін жоспарлы баға (RUB)",
+  "inputSelectCropError": "Дақылды таңдаңыз",
+  "inputSelectSoilError": "Топырақ түрін таңдаңыз",
+  "inputSelectDateError": "Басталу күнін таңдаңыз",
+  "inputAreaRequiredError": "Аумақты енгізіңіз",
+  "inputAreaMinError": "Аумақ 0-ден үлкен болуы керек",
   "actionCalculate": "Есептеу",
   "actionContinue": "Жалғастыру",
   "actionBack": "Артқа",
   "resultTitle": "Нәтиже",
+  "resultTreatedAreaLabel": "Өңделген аумақ: {area} га",
+  "@resultTreatedAreaLabel": {
+    "description": "Label for treated area on result screen",
+    "placeholders": {
+      "area": {}
+    }
+  },
+  "resultApplicationsLabel": "Өңдеулер",
   "resultTotal": "Жалпы мөлшер",
+  "phaseStartDateLabel": "Басталу күні: {date}",
+  "@phaseStartDateLabel": {
+    "description": "Label for the plan start date on the phase timeline screen",
+    "placeholders": {
+      "date": {}
+    }
+  },
   "phaseDayLabel": "Күн {day}",
   "@phaseDayLabel": {
     "description": "Label for a phase day offset",
