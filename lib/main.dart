@@ -52,7 +52,7 @@ class _LignoUrozhaiAppState extends State<LignoUrozhaiApp> {
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
               useMaterial3: true,
             ),
-            initialRoute: AppRoutes.input,
+            initialRoute: AppRoutes.splash,
             onGenerateRoute: onGenerateRoute,
           );
         },
