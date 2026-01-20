@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ligno_yiled/models/crop_input.dart';
-import 'package:ligno_yiled/screens/result_screen.dart';
-import 'package:ligno_yiled/services/calculator_service.dart';
+import 'package:ligno_yiled/screens/phase_timeline_screen.dart';
 
 class InputScreen extends StatefulWidget {
   const InputScreen({super.key});
@@ -19,7 +18,6 @@ class _InputScreenState extends State<InputScreen> {
   final _selectedCrop = ValueNotifier<String?>(null);
   final _selectedSoil = ValueNotifier<SoilType?>(null);
   final _selectedDate = ValueNotifier<DateTime?>(null);
-  final _calculatorService = CalculatorService();
 
   final _crops = const ['Apricot', 'Melons', 'Wheat'];
 
@@ -94,11 +92,9 @@ class _InputScreenState extends State<InputScreen> {
       pricePerTonRub: price,
     );
 
-    final result = _calculatorService.calculate(input);
-
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => ResultScreen(input: input, result: result),
+        builder: (context) => PhaseTimelineScreen(input: input),
       ),
     );
   }
