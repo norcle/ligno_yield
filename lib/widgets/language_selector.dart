@@ -10,7 +10,6 @@ class AppLanguageSelector extends StatelessWidget {
     'en': _LanguageOption(flag: '🇬🇧', label: 'English'),
     'uz': _LanguageOption(flag: '🇺🇿', label: 'O‘zbek'),
     'kk': _LanguageOption(flag: '🇰🇿', label: 'Қазақша'),
-    'tg': _LanguageOption(flag: '🇹🇯', label: 'Тоҷикӣ'),
     'ar': _LanguageOption(flag: '🇸🇦', label: 'العربية'),
   };
 

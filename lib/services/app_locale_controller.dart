@@ -9,7 +9,6 @@ class AppLocaleController extends ChangeNotifier {
     Locale('en'),
     Locale('uz'),
     Locale('kk'),
-    Locale('tg'),
     Locale('ar'),
   ];
 
