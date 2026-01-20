@@ -1,0 +1,54 @@
+{
+  "phaseTemplates": [
+    {
+      "cropId": "apricot",
+      "phases": [
+        {"id": "cuttings", "name": "Cuttings", "dayOffset": 0, "defaultEnabled": true},
+        {"id": "planting", "name": "Planting", "dayOffset": 1, "defaultEnabled": true},
+        {"id": "pit-formation", "name": "Pit formation", "dayOffset": 7, "defaultEnabled": true},
+        {"id": "flowering-end", "name": "End of flowering", "dayOffset": 30, "defaultEnabled": true},
+        {"id": "fruit-set", "name": "Fruit set", "dayOffset": 45, "defaultEnabled": false}
+      ]
+    },
+    {
+      "cropId": "melons",
+      "phases": [
+        {"id": "seedling", "name": "Seedling", "dayOffset": 0, "defaultEnabled": true},
+        {"id": "transplant", "name": "Transplanting", "dayOffset": 3, "defaultEnabled": true},
+        {"id": "vines", "name": "Vine growth", "dayOffset": 12, "defaultEnabled": true},
+        {"id": "flowering", "name": "Flowering", "dayOffset": 24, "defaultEnabled": true},
+        {"id": "maturity", "name": "Maturity", "dayOffset": 38, "defaultEnabled": false}
+      ]
+    },
+    {
+      "cropId": "wheat",
+      "phases": [
+        {"id": "tillering", "name": "Tillering", "dayOffset": 0, "defaultEnabled": true},
+        {"id": "stem-elongation", "name": "Stem elongation", "dayOffset": 10, "defaultEnabled": true},
+        {"id": "heading", "name": "Heading", "dayOffset": 20, "defaultEnabled": true},
+        {"id": "grain-fill", "name": "Grain fill", "dayOffset": 35, "defaultEnabled": true},
+        {"id": "maturity", "name": "Maturity", "dayOffset": 50, "defaultEnabled": false}
+      ]
+    },
+    {
+      "cropId": "grapes",
+      "phases": [
+        {"id": "bud-break", "name": "Bud break", "dayOffset": 0, "defaultEnabled": true},
+        {"id": "shoot-growth", "name": "Shoot growth", "dayOffset": 12, "defaultEnabled": true},
+        {"id": "flowering", "name": "Flowering", "dayOffset": 25, "defaultEnabled": true},
+        {"id": "berry-set", "name": "Berry set", "dayOffset": 38, "defaultEnabled": true},
+        {"id": "veraison", "name": "Veraison", "dayOffset": 55, "defaultEnabled": false}
+      ]
+    },
+    {
+      "cropId": "tomatoes",
+      "phases": [
+        {"id": "seedling", "name": "Seedling", "dayOffset": 0, "defaultEnabled": true},
+        {"id": "transplant", "name": "Transplanting", "dayOffset": 5, "defaultEnabled": true},
+        {"id": "flowering", "name": "Flowering", "dayOffset": 18, "defaultEnabled": true},
+        {"id": "fruiting", "name": "Fruit set", "dayOffset": 28, "defaultEnabled": true},
+        {"id": "ripening", "name": "Ripening", "dayOffset": 42, "defaultEnabled": false}
+      ]
+    }
+  ]
+}

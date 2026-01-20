@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:ligno_yiled/data/local_data_repository.dart';
+import 'package:ligno_yiled/models/crop.dart';
 import 'package:ligno_yiled/models/crop_input.dart';
 import 'package:ligno_yiled/routes.dart';
 import 'package:ligno_yiled/widgets/app_drawer.dart';
@@ -18,11 +20,18 @@ class _InputScreenState extends State<InputScreen> {
   final _avgYieldController = TextEditingController();
   final _priceController = TextEditingController();
   final _dateController = TextEditingController();
-  final _selectedCrop = ValueNotifier<String?>(null);
+  final _selectedCrop = ValueNotifier<Crop?>(null);
   final _selectedSoil = ValueNotifier<SoilType?>(null);
   final _selectedDate = ValueNotifier<DateTime?>(null);
 
-  final _crops = const ['Apricot', 'Melons', 'Wheat'];
+  final _dataRepository = LocalDataRepository.instance;
+  late final Future<List<Crop>> _cropsFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _cropsFuture = _dataRepository.getCrops();
+  }
 
   @override
   void dispose() {
@@ -87,7 +96,8 @@ class _InputScreenState extends State<InputScreen> {
     final price = _parseDouble(_priceController.text);
 
     final input = CropInput(
-      cropName: crop,
+      cropId: crop.id,
+      cropName: crop.name,
       soilType: soil,
       startDate: date,
       areaHa: area,
@@ -125,25 +135,33 @@ class _InputScreenState extends State<InputScreen> {
           child: ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              ValueListenableBuilder<String?>(
+              ValueListenableBuilder<Crop?>(
                 valueListenable: _selectedCrop,
                 builder: (context, value, _) {
-                  return DropdownButtonFormField<String>(
-                    value: value,
-                    decoration: InputDecoration(
-                      labelText: l10n.inputCrop,
-                    ),
-                    items: _crops
-                        .map(
-                          (crop) => DropdownMenuItem(
-                            value: crop,
-                            child: Text(crop),
-                          ),
-                        )
-                        .toList(),
-                    onChanged: (selection) => _selectedCrop.value = selection,
-                    validator: (selection) =>
-                        selection == null ? l10n.inputSelectCropError : null,
+                  return FutureBuilder<List<Crop>>(
+                    future: _cropsFuture,
+                    builder: (context, snapshot) {
+                      final crops = snapshot.data ?? const <Crop>[];
+                      return DropdownButtonFormField<Crop>(
+                        value: value,
+                        decoration: InputDecoration(
+                          labelText: l10n.inputCrop,
+                        ),
+                        items: crops
+                            .map(
+                              (crop) => DropdownMenuItem(
+                                value: crop,
+                                child: Text(crop.name),
+                              ),
+                            )
+                            .toList(),
+                        onChanged: (selection) =>
+                            _selectedCrop.value = selection,
+                        validator: (selection) => selection == null
+                            ? l10n.inputSelectCropError
+                            : null,
+                      );
+                    },
                   );
                 },
               ),
