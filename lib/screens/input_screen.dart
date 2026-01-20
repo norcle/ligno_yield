@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ligno_yiled/models/crop_input.dart';
-import 'package:ligno_yiled/screens/phase_timeline_screen.dart';
+import 'package:ligno_yiled/routes.dart';
+import 'package:ligno_yiled/widgets/app_drawer.dart';
 
 class InputScreen extends StatefulWidget {
   const InputScreen({super.key});
@@ -92,10 +93,9 @@ class _InputScreenState extends State<InputScreen> {
       pricePerTonRub: price,
     );
 
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => PhaseTimelineScreen(input: input),
-      ),
+    Navigator.of(context).pushNamed(
+      AppRoutes.phaseTimeline,
+      arguments: PhaseTimelineArgs(input: input),
     );
   }
 
@@ -105,9 +105,11 @@ class _InputScreenState extends State<InputScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Input Data'),
+        title: const Text('LignoUrozhai'),
+        centerTitle: true,
         backgroundColor: theme.colorScheme.inversePrimary,
       ),
+      drawer: const AppDrawer(),
       body: SafeArea(
         child: Form(
           key: _formKey,

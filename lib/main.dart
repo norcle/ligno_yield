@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ligno_yiled/screens/input_screen.dart';
+import 'package:ligno_yiled/routes.dart';
 
 void main() {
   runApp(const LignoUrozhaiApp());
@@ -16,7 +16,8 @@ class LignoUrozhaiApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         useMaterial3: true,
       ),
-      home: const InputScreen(),
+      initialRoute: AppRoutes.input,
+      onGenerateRoute: onGenerateRoute,
     );
   }
 }
