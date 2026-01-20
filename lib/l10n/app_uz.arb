@@ -41,5 +41,21 @@
     "placeholders": {
       "day": {}
     }
-  }
+  },
+  "menuProducts": "Mahsulotlar",
+  "productsTitle": "Mahsulotlar",
+  "searchHintProducts": "Mahsulotlarni qidirish",
+  "noProductsFound": "Mahsulotlar topilmadi",
+  "productNotFound": "Mahsulot topilmadi",
+  "productFormLabel": "Shakl",
+  "productUnitLabel": "Birlik",
+  "productFormLiquid": "Suyuq",
+  "productFormDry": "Quruq",
+  "productUnitLiters": "l",
+  "productUnitKilograms": "kg",
+  "sectionDescription": "Tavsif",
+  "sectionComposition": "Tarkibi",
+  "sectionInstructions": "Ko'rsatmalar",
+  "sectionWarnings": "Ogohlantirishlar",
+  "sectionFaq": "Savollar"
 }

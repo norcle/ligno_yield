@@ -41,5 +41,21 @@
     "placeholders": {
       "day": {}
     }
-  }
+  },
+  "menuProducts": "Products",
+  "productsTitle": "Products",
+  "searchHintProducts": "Search products",
+  "noProductsFound": "No products found",
+  "productNotFound": "Product not found",
+  "productFormLabel": "Form",
+  "productUnitLabel": "Unit",
+  "productFormLiquid": "Liquid",
+  "productFormDry": "Dry",
+  "productUnitLiters": "L",
+  "productUnitKilograms": "kg",
+  "sectionDescription": "Description",
+  "sectionComposition": "Composition",
+  "sectionInstructions": "Instructions",
+  "sectionWarnings": "Warnings",
+  "sectionFaq": "FAQ"
 }

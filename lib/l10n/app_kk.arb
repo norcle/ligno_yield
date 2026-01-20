@@ -41,5 +41,21 @@
     "placeholders": {
       "day": {}
     }
-  }
+  },
+  "menuProducts": "Өнімдер",
+  "productsTitle": "Өнімдер",
+  "searchHintProducts": "Өнімдерді іздеу",
+  "noProductsFound": "Өнімдер табылмады",
+  "productNotFound": "Өнім табылмады",
+  "productFormLabel": "Формасы",
+  "productUnitLabel": "Өлшем бірлігі",
+  "productFormLiquid": "Сұйық",
+  "productFormDry": "Құрғақ",
+  "productUnitLiters": "л",
+  "productUnitKilograms": "кг",
+  "sectionDescription": "Сипаттама",
+  "sectionComposition": "Құрамы",
+  "sectionInstructions": "Нұсқаулық",
+  "sectionWarnings": "Ескертулер",
+  "sectionFaq": "Сұрақтар"
 }

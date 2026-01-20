@@ -45,6 +45,11 @@ class AppDrawer extends StatelessWidget {
               onTap: () => _navigate(context, AppRoutes.input),
             ),
             ListTile(
+              leading: const Icon(Icons.inventory_2_outlined),
+              title: Text(l10n.menuProducts),
+              onTap: () => _navigate(context, AppRoutes.products),
+            ),
+            ListTile(
               leading: const Icon(Icons.info_outline),
               title: Text(l10n.menuAbout),
               onTap: () => _navigate(context, AppRoutes.about),

@@ -41,5 +41,21 @@
     "placeholders": {
       "day": {}
     }
-  }
+  },
+  "menuProducts": "المنتجات",
+  "productsTitle": "المنتجات",
+  "searchHintProducts": "ابحث عن المنتجات",
+  "noProductsFound": "لا توجد منتجات",
+  "productNotFound": "المنتج غير موجود",
+  "productFormLabel": "الشكل",
+  "productUnitLabel": "الوحدة",
+  "productFormLiquid": "سائل",
+  "productFormDry": "جاف",
+  "productUnitLiters": "لتر",
+  "productUnitKilograms": "كجم",
+  "sectionDescription": "الوصف",
+  "sectionComposition": "التركيب",
+  "sectionInstructions": "التعليمات",
+  "sectionWarnings": "تحذيرات",
+  "sectionFaq": "الأسئلة الشائعة"
 }

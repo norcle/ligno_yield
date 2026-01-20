@@ -41,5 +41,21 @@
     "placeholders": {
       "day": {}
     }
-  }
+  },
+  "menuProducts": "Маҳсулотҳо",
+  "productsTitle": "Маҳсулотҳо",
+  "searchHintProducts": "Ҷустуҷӯи маҳсулот",
+  "noProductsFound": "Маҳсулот ёфт нашуд",
+  "productNotFound": "Маҳсулот ёфт нашуд",
+  "productFormLabel": "Шакл",
+  "productUnitLabel": "Воҳид",
+  "productFormLiquid": "Моеъ",
+  "productFormDry": "Хушк",
+  "productUnitLiters": "л",
+  "productUnitKilograms": "кг",
+  "sectionDescription": "Тавсиф",
+  "sectionComposition": "Таркиб",
+  "sectionInstructions": "Дастур",
+  "sectionWarnings": "Огоҳӣ",
+  "sectionFaq": "Саволҳо"
 }

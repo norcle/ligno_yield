@@ -6,6 +6,8 @@ import 'package:ligno_yiled/screens/animated_splash_screen.dart';
 import 'package:ligno_yiled/screens/contacts_screen.dart';
 import 'package:ligno_yiled/screens/input_screen.dart';
 import 'package:ligno_yiled/screens/phase_timeline_screen.dart';
+import 'package:ligno_yiled/screens/product_details_screen.dart';
+import 'package:ligno_yiled/screens/product_list_screen.dart';
 import 'package:ligno_yiled/screens/result_screen.dart';
 
 class AppRoutes {
@@ -15,6 +17,8 @@ class AppRoutes {
   static const result = '/result';
   static const about = '/about';
   static const contacts = '/contacts';
+  static const products = '/products';
+  static const productDetails = '/products/details';
 }
 
 class PhaseTimelineArgs {
@@ -31,6 +35,12 @@ class ResultScreenArgs {
 
   final CropInput input;
   final CalculationResult result;
+}
+
+class ProductDetailsArgs {
+  const ProductDetailsArgs({required this.productId});
+
+  final String productId;
 }
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -65,6 +75,19 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case AppRoutes.contacts:
       return MaterialPageRoute(
         builder: (_) => const ContactsScreen(),
+        settings: settings,
+      );
+    case AppRoutes.products:
+      return MaterialPageRoute(
+        builder: (_) => const ProductListScreen(),
+        settings: settings,
+      );
+    case AppRoutes.productDetails:
+      final args = settings.arguments is ProductDetailsArgs
+          ? settings.arguments as ProductDetailsArgs
+          : null;
+      return MaterialPageRoute(
+        builder: (_) => ProductDetailsScreen(productId: args?.productId),
         settings: settings,
       );
     default:
