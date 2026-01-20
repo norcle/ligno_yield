@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:ligno_yiled/models/crop_input.dart';
 import 'package:ligno_yiled/models/phase_instance.dart';
 import 'package:ligno_yiled/models/phase_plan.dart';
-import 'package:ligno_yiled/screens/result_screen.dart';
+import 'package:ligno_yiled/routes.dart';
 import 'package:ligno_yiled/services/calculator_service.dart';
 import 'package:ligno_yiled/services/phase_plan_service.dart';
+import 'package:ligno_yiled/widgets/app_drawer.dart';
 
 class PhaseTimelineScreen extends StatefulWidget {
   const PhaseTimelineScreen({
@@ -61,10 +62,9 @@ class _PhaseTimelineScreenState extends State<PhaseTimelineScreen> {
     );
     final result = _calculatorService.calculate(widget.input, plan);
 
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => ResultScreen(input: widget.input, result: result),
-      ),
+    Navigator.of(context).pushNamed(
+      AppRoutes.result,
+      arguments: ResultScreenArgs(input: widget.input, result: result),
     );
   }
 
@@ -74,9 +74,11 @@ class _PhaseTimelineScreenState extends State<PhaseTimelineScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Phase Timeline'),
+        title: const Text('LignoUrozhai'),
+        centerTitle: true,
         backgroundColor: theme.colorScheme.inversePrimary,
       ),
+      drawer: const AppDrawer(),
       body: SafeArea(
         child: Column(
           children: [

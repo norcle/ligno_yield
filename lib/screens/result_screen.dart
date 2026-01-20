@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ligno_yiled/models/calculation_result.dart';
 import 'package:ligno_yiled/models/crop_input.dart';
+import 'package:ligno_yiled/widgets/app_drawer.dart';
 
 class ResultScreen extends StatelessWidget {
   const ResultScreen({
@@ -24,9 +25,11 @@ class ResultScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Result'),
+        title: const Text('LignoUrozhai'),
+        centerTitle: true,
         backgroundColor: theme.colorScheme.inversePrimary,
       ),
+      drawer: const AppDrawer(),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.all(16),
