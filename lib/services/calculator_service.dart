@@ -1,21 +1,22 @@
 import 'package:ligno_yiled/models/calculation_result.dart';
 import 'package:ligno_yiled/models/crop_input.dart';
+import 'package:ligno_yiled/models/phase_plan.dart';
 
 class CalculatorService {
-  CalculationResult calculate(CropInput input) {
+  CalculationResult calculate(CropInput input, PhasePlan plan) {
     const dosagePerHa = 0.2;
-    final products = ['Normat L', 'Normat C', 'Normat L'];
-    final items = List<ApplicationItem>.generate(products.length, (index) {
-      final date = input.startDate.add(Duration(days: index * 7));
-      final totalAmount = input.areaHa * dosagePerHa;
-      return ApplicationItem(
-        date: date,
-        stageName: 'Application ${index + 1}',
-        productName: products[index],
-        dosagePerHa: dosagePerHa,
-        totalAmount: totalAmount,
-      );
-    });
+    final items = plan.phases
+        .where((phase) => phase.isEnabled)
+        .map(
+          (phase) => ApplicationItem(
+            date: phase.date,
+            stageName: phase.name,
+            productName: _productForPhase(input.cropName, phase.name),
+            dosagePerHa: dosagePerHa,
+            totalAmount: input.areaHa * dosagePerHa,
+          ),
+        )
+        .toList();
 
     final totalAmount = items.fold<double>(
       0,
@@ -25,3 +26,36 @@ class CalculatorService {
     return CalculationResult(items: items, totalAmount: totalAmount);
   }
 }
+
+String _productForPhase(String cropName, String phaseName) {
+  const defaultProduct = 'Normat L';
+  final cropMap = _productMap[cropName];
+  if (cropMap == null) {
+    return defaultProduct;
+  }
+  return cropMap[phaseName] ?? defaultProduct;
+}
+
+const Map<String, Map<String, String>> _productMap = {
+  'Apricot': {
+    'Cuttings': 'Normat L',
+    'Planting': 'Normat C',
+    'Pit formation': 'Normat L',
+    'End of flowering': 'Normat C',
+    'Fruit set': 'Normat L',
+  },
+  'Melons': {
+    'Seedling': 'Normat L',
+    'Transplanting': 'Normat C',
+    'Vine growth': 'Normat L',
+    'Flowering': 'Normat C',
+    'Maturity': 'Normat L',
+  },
+  'Wheat': {
+    'Tillering': 'Normat L',
+    'Stem elongation': 'Normat C',
+    'Heading': 'Normat L',
+    'Grain fill': 'Normat C',
+    'Maturity': 'Normat L',
+  },
+};
