@@ -1,0 +1,13 @@
+{
+  "products": [
+    {"id": "normat-l", "name": "Normat L", "form": "liquid", "unit": "L"},
+    {"id": "normat-c", "name": "Normat C", "form": "dry", "unit": "kg"},
+    {"id": "flora-boost", "name": "Flora Boost", "form": "liquid", "unit": "L"},
+    {"id": "root-guard", "name": "Root Guard", "form": "dry", "unit": "kg"},
+    {"id": "leaf-vigor", "name": "Leaf Vigor", "form": "liquid", "unit": "L"},
+    {"id": "fruit-set", "name": "Fruit Set", "form": "liquid", "unit": "L"},
+    {"id": "grain-max", "name": "Grain Max", "form": "dry", "unit": "kg"},
+    {"id": "harvest-tone", "name": "Harvest Tone", "form": "dry", "unit": "kg"},
+    {"id": "yield-flex", "name": "Yield Flex", "form": "liquid", "unit": "L"}
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "crops": [
+    {"id": "apricot", "name": "Apricot"},
+    {"id": "melons", "name": "Melons"},
+    {"id": "wheat", "name": "Wheat"},
+    {"id": "grapes", "name": "Grapes"},
+    {"id": "tomatoes", "name": "Tomatoes"}
+  ]
+}

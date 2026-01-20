@@ -24,18 +24,18 @@ class PhaseTimelineScreen extends StatefulWidget {
 class _PhaseTimelineScreenState extends State<PhaseTimelineScreen> {
   final _phasePlanService = PhasePlanService();
   final _calculatorService = CalculatorService();
-  late final ValueNotifier<List<PhaseInstance>> _phasesNotifier;
+  ValueNotifier<List<PhaseInstance>>? _phasesNotifier;
+  late final Future<PhasePlan> _planFuture;
 
   @override
   void initState() {
     super.initState();
-    final plan = _phasePlanService.generatePlan(widget.input);
-    _phasesNotifier = ValueNotifier<List<PhaseInstance>>(plan.phases);
+    _planFuture = _phasePlanService.generatePlan(widget.input);
   }
 
   @override
   void dispose() {
-    _phasesNotifier.dispose();
+    _phasesNotifier?.dispose();
     super.dispose();
   }
 
@@ -46,23 +46,34 @@ class _PhaseTimelineScreenState extends State<PhaseTimelineScreen> {
   }
 
   void _togglePhase(PhaseInstance phase, bool? isEnabled) {
+    final notifier = _phasesNotifier;
+    if (notifier == null) {
+      return;
+    }
     final enabled = isEnabled ?? false;
-    final updated = _phasesNotifier.value
+    final updated = notifier.value
         .map(
           (item) =>
               item.id == phase.id ? item.copyWith(isEnabled: enabled) : item,
         )
         .toList();
-    _phasesNotifier.value = updated;
+    notifier.value = updated;
   }
 
-  void _continueToResult() {
+  Future<void> _continueToResult() async {
+    final notifier = _phasesNotifier;
+    if (notifier == null) {
+      return;
+    }
     final plan = PhasePlan(
       cropName: widget.input.cropName,
       startDate: widget.input.startDate,
-      phases: _phasesNotifier.value,
+      phases: notifier.value,
     );
-    final result = _calculatorService.calculate(widget.input, plan);
+    final result = await _calculatorService.calculate(widget.input, plan);
+    if (!mounted) {
+      return;
+    }
 
     Navigator.of(context).pushNamed(
       AppRoutes.result,
@@ -89,84 +100,98 @@ class _PhaseTimelineScreenState extends State<PhaseTimelineScreen> {
       ),
       drawer: const AppDrawer(),
       body: SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.input.cropName,
-                    style: theme.textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    l10n.phaseStartDateLabel(
-                      _formatDate(widget.input.startDate),
-                    ),
-                    style: theme.textTheme.bodyLarge,
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: ValueListenableBuilder<List<PhaseInstance>>(
-                valueListenable: _phasesNotifier,
-                builder: (context, phases, _) {
-                  return ListView.separated(
-                    padding: const EdgeInsetsDirectional.fromSTEB(
-                      16,
-                      8,
-                      16,
-                      16,
-                    ),
-                    itemCount: phases.length,
-                    separatorBuilder: (_, __) => const SizedBox(height: 8),
-                    itemBuilder: (context, index) {
-                      final phase = phases[index];
-                      return Card(
-                        elevation: 0,
-                        color: theme.colorScheme.surfaceContainerHighest,
-                        child: ListTile(
-                          leading: Checkbox(
-                            value: phase.isEnabled,
-                            onChanged: (value) => _togglePhase(phase, value),
-                          ),
-                          title: Text(phase.name),
-                          subtitle: Text(
-                            '${l10n.phaseDayLabel(phase.dayOffset)} · ${_formatDate(phase.date)}',
-                          ),
+        child: FutureBuilder<PhasePlan>(
+          future: _planFuture,
+          builder: (context, snapshot) {
+            final plan = snapshot.data;
+            if (plan != null && _phasesNotifier == null) {
+              _phasesNotifier = ValueNotifier<List<PhaseInstance>>(plan.phases);
+            }
+            final notifier = _phasesNotifier;
+            if (plan == null || notifier == null) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            return Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 8),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.input.cropName,
+                        style: theme.textTheme.headlineSmall?.copyWith(
+                          fontWeight: FontWeight.w600,
                         ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        l10n.phaseStartDateLabel(
+                          _formatDate(widget.input.startDate),
+                        ),
+                        style: theme.textTheme.bodyLarge,
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: ValueListenableBuilder<List<PhaseInstance>>(
+                    valueListenable: notifier,
+                    builder: (context, phases, _) {
+                      return ListView.separated(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                          16,
+                          8,
+                          16,
+                          16,
+                        ),
+                        itemCount: phases.length,
+                        separatorBuilder: (_, __) => const SizedBox(height: 8),
+                        itemBuilder: (context, index) {
+                          final phase = phases[index];
+                          return Card(
+                            elevation: 0,
+                            color: theme.colorScheme.surfaceContainerHighest,
+                            child: ListTile(
+                              leading: Checkbox(
+                                value: phase.isEnabled,
+                                onChanged: (value) =>
+                                    _togglePhase(phase, value),
+                              ),
+                              title: Text(phase.name),
+                              subtitle: Text(
+                                '${l10n.phaseDayLabel(phase.dayOffset)} · ${_formatDate(phase.date)}',
+                              ),
+                            ),
+                          );
+                        },
                       );
                     },
-                  );
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      child: Text(l10n.actionBack),
-                    ),
                   ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: FilledButton(
-                      onPressed: _continueToResult,
-                      child: Text(l10n.actionContinue),
-                    ),
+                ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: OutlinedButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: Text(l10n.actionBack),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: FilledButton(
+                          onPressed: _continueToResult,
+                          child: Text(l10n.actionContinue),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-          ],
+                ),
+              ],
+            );
+          },
         ),
       ),
     );

@@ -9,6 +9,7 @@ enum SoilType {
 
 class CropInput {
   const CropInput({
+    required this.cropId,
     required this.cropName,
     required this.soilType,
     required this.startDate,
@@ -17,6 +18,7 @@ class CropInput {
     this.pricePerTonRub,
   });
 
+  final String cropId;
   final String cropName;
   final SoilType soilType;
   final DateTime startDate;

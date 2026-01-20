@@ -68,6 +68,9 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/animations/plant.json
+    - assets/data/crops.json
+    - assets/data/phase_templates.json
+    - assets/data/products.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
