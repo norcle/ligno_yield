@@ -33,7 +33,7 @@ class ResultScreen extends StatelessWidget {
         backgroundColor: theme.colorScheme.inversePrimary,
         actions: const [
           Padding(
-            padding: EdgeInsets.only(right: 8),
+            padding: EdgeInsetsDirectional.only(end: 8),
             child: AppLanguageSelector(),
           ),
         ],
@@ -58,12 +58,12 @@ class ResultScreen extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              'Treated area: ${input.areaHa.toStringAsFixed(2)} ha',
+              l10n.resultTreatedAreaLabel(input.areaHa.toStringAsFixed(2)),
               style: theme.textTheme.bodyLarge,
             ),
             const SizedBox(height: 16),
             Text(
-              'Applications',
+              l10n.resultApplicationsLabel,
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.w600,
               ),

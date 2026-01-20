@@ -8,11 +8,33 @@
   "inputSoilType": "Soil type",
   "inputStartDate": "Vegetation start date",
   "inputArea": "Treated area (ha)",
+  "inputAvgYieldLabel": "Average yield (centner/ha)",
+  "inputPriceLabel": "Planned price per 1 ton (RUB)",
+  "inputSelectCropError": "Select a crop",
+  "inputSelectSoilError": "Select a soil type",
+  "inputSelectDateError": "Select a start date",
+  "inputAreaRequiredError": "Enter an area",
+  "inputAreaMinError": "Area must be greater than 0",
   "actionCalculate": "Calculate",
   "actionContinue": "Continue",
   "actionBack": "Back",
   "resultTitle": "Result",
+  "resultTreatedAreaLabel": "Treated area: {area} ha",
+  "@resultTreatedAreaLabel": {
+    "description": "Label for treated area on result screen",
+    "placeholders": {
+      "area": {}
+    }
+  },
+  "resultApplicationsLabel": "Applications",
   "resultTotal": "Total amount",
+  "phaseStartDateLabel": "Start date: {date}",
+  "@phaseStartDateLabel": {
+    "description": "Label for the plan start date on the phase timeline screen",
+    "placeholders": {
+      "date": {}
+    }
+  },
   "phaseDayLabel": "Day {day}",
   "@phaseDayLabel": {
     "description": "Label for a phase day offset",

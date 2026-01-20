@@ -18,7 +18,7 @@ class ContactsScreen extends StatelessWidget {
         backgroundColor: theme.colorScheme.inversePrimary,
         actions: const [
           Padding(
-            padding: EdgeInsets.only(right: 8),
+            padding: EdgeInsetsDirectional.only(end: 8),
             child: AppLanguageSelector(),
           ),
         ],

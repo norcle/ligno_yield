@@ -1,0 +1,45 @@
+{
+  "@@locale": "ar",
+  "appTitle": "LignoUrozhai",
+  "menuCalculator": "الحاسبة",
+  "menuAbout": "حول التطبيق",
+  "menuContacts": "جهات الاتصال / الدعم",
+  "inputCrop": "المحصول",
+  "inputSoilType": "نوع التربة",
+  "inputStartDate": "تاريخ بدء النمو",
+  "inputArea": "المساحة المعالجة (هكتار)",
+  "inputAvgYieldLabel": "متوسط الإنتاجية (قنطار/هكتار)",
+  "inputPriceLabel": "السعر المخطط لكل طن (روبل)",
+  "inputSelectCropError": "اختر المحصول",
+  "inputSelectSoilError": "اختر نوع التربة",
+  "inputSelectDateError": "اختر تاريخ البدء",
+  "inputAreaRequiredError": "أدخل المساحة",
+  "inputAreaMinError": "يجب أن تكون المساحة أكبر من 0",
+  "actionCalculate": "احسب",
+  "actionContinue": "متابعة",
+  "actionBack": "رجوع",
+  "resultTitle": "النتيجة",
+  "resultTreatedAreaLabel": "المساحة المعالجة: {area} هكتار",
+  "@resultTreatedAreaLabel": {
+    "description": "Label for treated area on result screen",
+    "placeholders": {
+      "area": {}
+    }
+  },
+  "resultApplicationsLabel": "المعالجات",
+  "resultTotal": "الإجمالي",
+  "phaseStartDateLabel": "تاريخ البدء: {date}",
+  "@phaseStartDateLabel": {
+    "description": "Label for the plan start date on the phase timeline screen",
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "phaseDayLabel": "اليوم {day}",
+  "@phaseDayLabel": {
+    "description": "Label for a phase day offset",
+    "placeholders": {
+      "day": {}
+    }
+  }
+}

@@ -113,7 +113,7 @@ class _InputScreenState extends State<InputScreen> {
         backgroundColor: theme.colorScheme.inversePrimary,
         actions: const [
           Padding(
-            padding: EdgeInsets.only(right: 8),
+            padding: EdgeInsetsDirectional.only(end: 8),
             child: AppLanguageSelector(),
           ),
         ],
@@ -143,7 +143,7 @@ class _InputScreenState extends State<InputScreen> {
                         .toList(),
                     onChanged: (selection) => _selectedCrop.value = selection,
                     validator: (selection) =>
-                        selection == null ? 'Select a crop' : null,
+                        selection == null ? l10n.inputSelectCropError : null,
                   );
                 },
               ),
@@ -166,7 +166,7 @@ class _InputScreenState extends State<InputScreen> {
                         .toList(),
                     onChanged: (selection) => _selectedSoil.value = selection,
                     validator: (selection) =>
-                        selection == null ? 'Select a soil type' : null,
+                        selection == null ? l10n.inputSelectSoilError : null,
                   );
                 },
               ),
@@ -180,7 +180,7 @@ class _InputScreenState extends State<InputScreen> {
                 ),
                 onTap: _pickDate,
                 validator: (_) => _selectedDate.value == null
-                    ? 'Select a start date'
+                    ? l10n.inputSelectDateError
                     : null,
               ),
               const SizedBox(height: 16),
@@ -195,10 +195,10 @@ class _InputScreenState extends State<InputScreen> {
                 validator: (value) {
                   final parsed = _parseDouble(value ?? '');
                   if (parsed == null) {
-                    return 'Enter an area';
+                    return l10n.inputAreaRequiredError;
                   }
                   if (parsed <= 0) {
-                    return 'Area must be greater than 0';
+                    return l10n.inputAreaMinError;
                   }
                   return null;
                 },
@@ -206,8 +206,8 @@ class _InputScreenState extends State<InputScreen> {
               const SizedBox(height: 16),
               TextFormField(
                 controller: _avgYieldController,
-                decoration: const InputDecoration(
-                  labelText: 'Average yield (centner/ha)',
+                decoration: InputDecoration(
+                  labelText: l10n.inputAvgYieldLabel,
                 ),
                 keyboardType: const TextInputType.numberWithOptions(
                   decimal: true,
@@ -216,8 +216,8 @@ class _InputScreenState extends State<InputScreen> {
               const SizedBox(height: 16),
               TextFormField(
                 controller: _priceController,
-                decoration: const InputDecoration(
-                  labelText: 'Planned price per 1 ton (RUB)',
+                decoration: InputDecoration(
+                  labelText: l10n.inputPriceLabel,
                 ),
                 keyboardType: const TextInputType.numberWithOptions(
                   decimal: true,
