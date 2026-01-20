@@ -41,5 +41,21 @@
     "placeholders": {
       "day": {}
     }
-  }
+  },
+  "menuProducts": "Продукты",
+  "productsTitle": "Продукты",
+  "searchHintProducts": "Поиск продуктов",
+  "noProductsFound": "Продукты не найдены",
+  "productNotFound": "Продукт не найден",
+  "productFormLabel": "Форма",
+  "productUnitLabel": "Ед. измерения",
+  "productFormLiquid": "Жидкий",
+  "productFormDry": "Сухой",
+  "productUnitLiters": "л",
+  "productUnitKilograms": "кг",
+  "sectionDescription": "Описание",
+  "sectionComposition": "Состав",
+  "sectionInstructions": "Инструкция",
+  "sectionWarnings": "Предупреждения",
+  "sectionFaq": "Вопросы"
 }
