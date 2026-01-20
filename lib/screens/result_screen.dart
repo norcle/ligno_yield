@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ligno_yiled/l10n/app_localizations.dart';
 import 'package:ligno_yiled/models/calculation_result.dart';
-import 'package:ligno_yiled/models/crop_input.dart';
+import 'package:ligno_yiled/state/app_providers.dart';
 import 'package:ligno_yiled/widgets/app_drawer.dart';
 import 'package:ligno_yiled/widgets/language_selector.dart';
 
-class ResultScreen extends StatelessWidget {
+class ResultScreen extends ConsumerWidget {
   const ResultScreen({
     super.key,
-    required this.input,
     required this.result,
   });
 
-  final CropInput input;
   final CalculationResult result;
 
   String _formatDate(DateTime date) {
@@ -22,9 +21,12 @@ class ResultScreen extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context)!;
+    final draft = ref.watch(calculatorDraftProvider);
+    final cropName = draft.cropName ?? '';
+    final areaLabel = draft.areaHa?.toStringAsFixed(2) ?? '0.00';
 
     return Scaffold(
       appBar: AppBar(
@@ -51,14 +53,14 @@ class ResultScreen extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             Text(
-              input.cropName,
+              cropName,
               style: theme.textTheme.headlineSmall?.copyWith(
                 fontWeight: FontWeight.w600,
               ),
             ),
             const SizedBox(height: 8),
             Text(
-              l10n.resultTreatedAreaLabel(input.areaHa.toStringAsFixed(2)),
+              l10n.resultTreatedAreaLabel(areaLabel),
               style: theme.textTheme.bodyLarge,
             ),
             const SizedBox(height: 16),

@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ligno_yiled/l10n/app_localizations.dart';
 import 'package:ligno_yiled/data/local_data_repository.dart';
 import 'package:ligno_yiled/models/crop.dart';
 import 'package:ligno_yiled/models/crop_input.dart';
 import 'package:ligno_yiled/routes.dart';
+import 'package:ligno_yiled/state/app_providers.dart';
 import 'package:ligno_yiled/widgets/app_drawer.dart';
 import 'package:ligno_yiled/widgets/language_selector.dart';
 
-class InputScreen extends StatefulWidget {
+class InputScreen extends ConsumerStatefulWidget {
   const InputScreen({super.key});
 
   @override
-  State<InputScreen> createState() => _InputScreenState();
+  ConsumerState<InputScreen> createState() => _InputScreenState();
 }
 
-class _InputScreenState extends State<InputScreen> {
+class _InputScreenState extends ConsumerState<InputScreen> {
   final _formKey = GlobalKey<FormState>();
   final _areaController = TextEditingController();
   final _avgYieldController = TextEditingController();
@@ -23,6 +25,7 @@ class _InputScreenState extends State<InputScreen> {
   final _selectedCrop = ValueNotifier<Crop?>(null);
   final _selectedSoil = ValueNotifier<SoilType?>(null);
   final _selectedDate = ValueNotifier<DateTime?>(null);
+  String? _initialCropId;
 
   final _dataRepository = LocalDataRepository.instance;
   late final Future<List<Crop>> _cropsFuture;
@@ -31,6 +34,16 @@ class _InputScreenState extends State<InputScreen> {
   void initState() {
     super.initState();
     _cropsFuture = _dataRepository.getCrops();
+    final draft = ref.read(calculatorDraftProvider);
+    _initialCropId = draft.cropId;
+    _selectedSoil.value = draft.soilType;
+    _selectedDate.value = draft.startDate;
+    if (draft.startDate != null) {
+      _dateController.text = _formatDate(draft.startDate!);
+    }
+    if (draft.areaHa != null) {
+      _areaController.text = draft.areaHa.toString();
+    }
   }
 
   @override
@@ -72,6 +85,7 @@ class _InputScreenState extends State<InputScreen> {
     if (picked != null) {
       _selectedDate.value = picked;
       _dateController.text = _formatDate(picked);
+      ref.read(calculatorDraftProvider.notifier).updateStartDate(picked);
     }
   }
 
@@ -115,6 +129,7 @@ class _InputScreenState extends State<InputScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context)!;
+    final draft = ref.watch(calculatorDraftProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -140,13 +155,30 @@ class _InputScreenState extends State<InputScreen> {
                 builder: (context, value, _) {
                   return FutureBuilder<List<Crop>>(
                     future: _cropsFuture,
-                    builder: (context, snapshot) {
-                      final crops = snapshot.data ?? const <Crop>[];
-                      return DropdownButtonFormField<Crop>(
-                        value: value,
-                        decoration: InputDecoration(
-                          labelText: l10n.inputCrop,
-                        ),
+                builder: (context, snapshot) {
+                  final crops = snapshot.data ?? const <Crop>[];
+                  final preferredCropId = _selectedCrop.value?.id ??
+                      _initialCropId ??
+                      draft.cropId;
+                  if (preferredCropId != null) {
+                    final matched = crops
+                        .where((crop) => crop.id == preferredCropId)
+                        .toList();
+                    if (matched.isNotEmpty &&
+                        _selectedCrop.value?.id != matched.first.id) {
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        if (!mounted) {
+                          return;
+                        }
+                        _selectedCrop.value = matched.first;
+                      });
+                    }
+                  }
+                  return DropdownButtonFormField<Crop>(
+                    value: value,
+                    decoration: InputDecoration(
+                      labelText: l10n.inputCrop,
+                    ),
                         items: crops
                             .map(
                               (crop) => DropdownMenuItem(
@@ -155,8 +187,17 @@ class _InputScreenState extends State<InputScreen> {
                               ),
                             )
                             .toList(),
-                        onChanged: (selection) =>
-                            _selectedCrop.value = selection,
+                        onChanged: (selection) {
+                          _selectedCrop.value = selection;
+                          if (selection != null) {
+                            ref
+                                .read(calculatorDraftProvider.notifier)
+                                .updateCrop(
+                                  id: selection.id,
+                                  name: selection.name,
+                                );
+                          }
+                        },
                         validator: (selection) => selection == null
                             ? l10n.inputSelectCropError
                             : null,
@@ -182,7 +223,12 @@ class _InputScreenState extends State<InputScreen> {
                           ),
                         )
                         .toList(),
-                    onChanged: (selection) => _selectedSoil.value = selection,
+                    onChanged: (selection) {
+                      _selectedSoil.value = selection;
+                      ref
+                          .read(calculatorDraftProvider.notifier)
+                          .updateSoilType(selection);
+                    },
                     validator: (selection) =>
                         selection == null ? l10n.inputSelectSoilError : null,
                   );
@@ -210,6 +256,11 @@ class _InputScreenState extends State<InputScreen> {
                 keyboardType: const TextInputType.numberWithOptions(
                   decimal: true,
                 ),
+                onChanged: (value) {
+                  ref
+                      .read(calculatorDraftProvider.notifier)
+                      .updateArea(_parseDouble(value));
+                },
                 validator: (value) {
                   final parsed = _parseDouble(value ?? '');
                   if (parsed == null) {
