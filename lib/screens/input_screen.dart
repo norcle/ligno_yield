@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:ligno_yiled/l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ligno_yiled/data/local_data_repository.dart';
+import 'package:ligno_yiled/l10n/app_localizations.dart';
 import 'package:ligno_yiled/models/crop.dart';
 import 'package:ligno_yiled/models/crop_input.dart';
 import 'package:ligno_yiled/routes.dart';
+import 'package:ligno_yiled/state/calculator_draft_provider.dart';
 import 'package:ligno_yiled/widgets/app_drawer.dart';
 import 'package:ligno_yiled/widgets/language_selector.dart';
 
-class InputScreen extends StatefulWidget {
+class InputScreen extends ConsumerStatefulWidget {
   const InputScreen({super.key});
 
   @override
-  State<InputScreen> createState() => _InputScreenState();
+  ConsumerState<InputScreen> createState() => _InputScreenState();
 }
 
-class _InputScreenState extends State<InputScreen> {
+class _InputScreenState extends ConsumerState<InputScreen> {
   final _formKey = GlobalKey<FormState>();
   final _areaController = TextEditingController();
   final _avgYieldController = TextEditingController();
@@ -31,6 +33,16 @@ class _InputScreenState extends State<InputScreen> {
   void initState() {
     super.initState();
     _cropsFuture = _dataRepository.getCrops();
+    final draft = ref.read(calculatorDraftProvider);
+    _selectedCrop.value = draft.crop;
+    _selectedSoil.value = draft.soilType;
+    _selectedDate.value = draft.startDate;
+    if (draft.areaHa != null) {
+      _areaController.text = draft.areaHa!.toString();
+    }
+    if (draft.startDate != null) {
+      _dateController.text = _formatDate(draft.startDate!);
+    }
   }
 
   @override
@@ -72,6 +84,7 @@ class _InputScreenState extends State<InputScreen> {
     if (picked != null) {
       _selectedDate.value = picked;
       _dateController.text = _formatDate(picked);
+      ref.read(calculatorDraftProvider.notifier).updateStartDate(picked);
     }
   }
 
@@ -155,8 +168,12 @@ class _InputScreenState extends State<InputScreen> {
                               ),
                             )
                             .toList(),
-                        onChanged: (selection) =>
-                            _selectedCrop.value = selection,
+                        onChanged: (selection) {
+                          _selectedCrop.value = selection;
+                          ref
+                              .read(calculatorDraftProvider.notifier)
+                              .updateCrop(selection);
+                        },
                         validator: (selection) => selection == null
                             ? l10n.inputSelectCropError
                             : null,
@@ -182,7 +199,12 @@ class _InputScreenState extends State<InputScreen> {
                           ),
                         )
                         .toList(),
-                    onChanged: (selection) => _selectedSoil.value = selection,
+                    onChanged: (selection) {
+                      _selectedSoil.value = selection;
+                      ref
+                          .read(calculatorDraftProvider.notifier)
+                          .updateSoilType(selection);
+                    },
                     validator: (selection) =>
                         selection == null ? l10n.inputSelectSoilError : null,
                   );
@@ -210,6 +232,11 @@ class _InputScreenState extends State<InputScreen> {
                 keyboardType: const TextInputType.numberWithOptions(
                   decimal: true,
                 ),
+                onChanged: (value) {
+                  ref
+                      .read(calculatorDraftProvider.notifier)
+                      .updateAreaHa(_parseDouble(value));
+                },
                 validator: (value) {
                   final parsed = _parseDouble(value ?? '');
                   if (parsed == null) {
