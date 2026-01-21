@@ -77,7 +77,7 @@ class _PhaseTimelineScreenState extends State<PhaseTimelineScreen> {
 
     Navigator.of(context).pushNamed(
       AppRoutes.result,
-      arguments: ResultScreenArgs(input: widget.input, result: result),
+      arguments: ResultScreenArgs(result: result),
     );
   }
 

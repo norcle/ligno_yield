@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ligno_yiled/services/app_locale_controller.dart';
-import 'package:ligno_yiled/widgets/locale_scope.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ligno_yiled/state/locale_provider.dart';
 
-class AppLanguageSelector extends StatelessWidget {
+class AppLanguageSelector extends ConsumerWidget {
   const AppLanguageSelector({super.key});
 
   static const Map<String, _LanguageOption> _languageOptions = {
@@ -14,21 +14,21 @@ class AppLanguageSelector extends StatelessWidget {
   };
 
   @override
-  Widget build(BuildContext context) {
-    final controller = LocaleScope.of(context);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final localeState = ref.watch(localeProvider);
 
     return DropdownButtonHideUnderline(
       child: DropdownButton<Locale>(
-        value: controller.locale,
+        value: localeState.locale,
         icon: const Icon(Icons.language_outlined),
         onChanged: (locale) {
           if (locale == null) {
             return;
           }
-          controller.setLocale(locale);
+          ref.read(localeProvider.notifier).setLocale(locale);
         },
         selectedItemBuilder: (context) {
-          return AppLocaleController.supportedLocales.map((locale) {
+          return supportedLocales.map((locale) {
             final option = _languageOptions[locale.languageCode];
             return _LanguageOptionRow(
               option: option,
@@ -37,7 +37,7 @@ class AppLanguageSelector extends StatelessWidget {
             );
           }).toList();
         },
-        items: AppLocaleController.supportedLocales.map((locale) {
+        items: supportedLocales.map((locale) {
           final option = _languageOptions[locale.languageCode];
           return DropdownMenuItem<Locale>(
             value: locale,
