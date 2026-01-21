@@ -29,11 +29,9 @@ class PhaseTimelineArgs {
 
 class ResultScreenArgs {
   const ResultScreenArgs({
-    required this.input,
     required this.result,
   });
 
-  final CropInput input;
   final CalculationResult result;
 }
 
@@ -64,7 +62,7 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case AppRoutes.result:
       final args = settings.arguments as ResultScreenArgs;
       return MaterialPageRoute(
-        builder: (_) => ResultScreen(input: args.input, result: args.result),
+        builder: (_) => ResultScreen(result: args.result),
         settings: settings,
       );
     case AppRoutes.about:

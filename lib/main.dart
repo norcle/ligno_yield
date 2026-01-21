@@ -1,65 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:ligno_yiled/l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ligno_yiled/data/local_data_repository.dart';
+import 'package:ligno_yiled/l10n/app_localizations.dart';
 import 'package:ligno_yiled/routes.dart';
-import 'package:ligno_yiled/services/app_locale_controller.dart';
-import 'package:ligno_yiled/widgets/locale_scope.dart';
+import 'package:ligno_yiled/state/app_bootstrap.dart';
+import 'package:ligno_yiled/state/locale_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await LocalDataRepository.instance.preload();
-  runApp(const LignoUrozhaiApp());
+  runApp(
+    const ProviderScope(
+      child: AppBootstrap(child: LignoUrozhaiApp()),
+    ),
+  );
 }
 
-class LignoUrozhaiApp extends StatefulWidget {
+class LignoUrozhaiApp extends ConsumerWidget {
   const LignoUrozhaiApp({super.key});
 
   @override
-  State<LignoUrozhaiApp> createState() => _LignoUrozhaiAppState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final localeState = ref.watch(localeProvider);
 
-class _LignoUrozhaiAppState extends State<LignoUrozhaiApp> {
-  late final AppLocaleController _localeController;
-
-  @override
-  void initState() {
-    super.initState();
-    _localeController = AppLocaleController();
-    final systemLocale =
-        WidgetsBinding.instance.platformDispatcher.locale;
-    _localeController.setLocale(
-      _localeController.resolveSystemLocale(systemLocale),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return LocaleScope(
-      controller: _localeController,
-      child: AnimatedBuilder(
-        animation: _localeController,
-        builder: (context, _) {
-          return MaterialApp(
-            onGenerateTitle: (context) =>
-                AppLocalizations.of(context)!.appTitle,
-            locale: _localeController.locale,
-            supportedLocales: AppLocaleController.supportedLocales,
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
-              useMaterial3: true,
-            ),
-            initialRoute: AppRoutes.splash,
-            onGenerateRoute: onGenerateRoute,
-          );
-        },
+    return MaterialApp(
+      onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
+      locale: localeState.locale,
+      supportedLocales: supportedLocales,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+        useMaterial3: true,
       ),
+      initialRoute: AppRoutes.splash,
+      onGenerateRoute: onGenerateRoute,
     );
   }
 }
